@@ -126,6 +126,18 @@ export default function Home() {
           0%, 100% { opacity: .35; transform: scale(1); }
           50% { opacity: .75; transform: scale(1.06); }
         }
+        @keyframes sectionReveal {
+          from { opacity: 0; transform: translateY(28px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes cardLift {
+          from { transform: translateY(0); }
+          to { transform: translateY(-6px); }
+        }
+        @keyframes softShimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
         .hero-fade-up {
           animation: heroFadeUp .8s ease-out both;
         }
@@ -138,20 +150,51 @@ export default function Home() {
         .hero-fade-up-delay-3 {
           animation: heroFadeUp .8s .36s ease-out both;
         }
+        .hero-orbit {
+          animation: orbitPulse 7s ease-in-out infinite;
+          transform-origin: center;
+        }
+        @keyframes orbitPulse {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: .55; }
+          50% { transform: translate(-50%, -50%) scale(1.04); opacity: .9; }
+        }
         .hero-float {
           animation: heroFloat 5s ease-in-out infinite;
         }
         .hero-glow {
           animation: glowPulse 4s ease-in-out infinite;
         }
+        .sq-reveal {
+          animation: sectionReveal .8s cubic-bezier(.22,1,.36,1) both;
+        }
+        .sq-card {
+          transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+        }
+        .sq-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 18px 40px rgba(7, 27, 59, .10);
+        }
+        .sq-shimmer {
+          background-size: 200% 100%;
+          animation: softShimmer 3.5s linear infinite;
+        }
+        .sq-delay-1 { animation-delay: .08s; }
+        .sq-delay-2 { animation-delay: .16s; }
+        .sq-delay-3 { animation-delay: .24s; }
+        .sq-delay-4 { animation-delay: .32s; }
         @media (prefers-reduced-motion: reduce) {
           .hero-fade-up,
           .hero-fade-up-delay-1,
           .hero-fade-up-delay-2,
           .hero-fade-up-delay-3,
+          .hero-orbit,
           .hero-float,
-          .hero-glow {
+          .hero-glow,
+          .sq-reveal,
+          .sq-card,
+          .sq-shimmer {
             animation: none !important;
+            transition: none !important;
           }
         }
       `}</style>
@@ -230,27 +273,28 @@ export default function Home() {
       {/* ================= HERO ================= */}
       <section className="relative min-h-[760px] overflow-hidden bg-[#071b3b] pt-[78px]">
 
-        {/* HERO BACKGROUND */}
-<div className="absolute inset-0 bg-[#071b3b]" />
+        {/* HERO BASE */}
+        <div className="absolute inset-0 bg-[#071b3b]" />
 
-{/* IMAGE — RIGHT SIDE ONLY */}
-<div className="absolute right-0 top-0 hidden h-full w-[58%] overflow-hidden lg:block">
-  <div
-    className="absolute inset-0 bg-cover bg-right bg-no-repeat"
-    style={{
-      backgroundImage: "url('/images/hero-bg.png')",
-    }}
-  />
+        {/* BACKGROUND IMAGE — RIGHT SIDE ONLY
+            The source image contains its own text/logo, so it must not
+            cover the complete hero. Keeping it on the right prevents
+            it from overlapping the actual Hero copy. */}
+        <div className="absolute right-0 top-0 hidden h-full w-[58%] overflow-hidden lg:block">
+          <div
+            className="absolute inset-0 bg-cover bg-right bg-no-repeat"
+            style={{ backgroundImage: "url('/images/hero-bg.png')" }}
+          />
 
-  {/* Darken image */}
-  <div className="absolute inset-0 bg-[#071b3b]/35" />
+          {/* Keep the image subtle */}
+          <div className="absolute inset-0 bg-[#071b3b]/50" />
 
-  {/* Fade image into left side */}
-  <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#071b3b] via-[#071b3b]/80 to-transparent" />
+          {/* Fade image into the clean left side */}
+          <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#071b3b] via-[#071b3b]/85 to-transparent" />
 
-  {/* Bottom fade */}
-  <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#071b3b] to-transparent" />
-</div>
+          {/* Fade image into the bottom */}
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#071b3b] to-transparent" />
+        </div>
 
         {/* Blue atmospheric glows */}
         <div className="hero-glow absolute -right-40 top-20 h-[520px] w-[520px] rounded-full bg-blue-500/15 blur-[110px]" />
@@ -352,7 +396,7 @@ export default function Home() {
           <div className="relative hidden h-[550px] lg:block">
 
             <div className="hero-float absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-400/30" />
-            <div className="absolute left-1/2 top-1/2 h-[390px] w-[390px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-400/30" />
+            <div className="hero-orbit absolute left-1/2 top-1/2 h-[390px] w-[390px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-400/30" />
             <div className="absolute left-1/2 top-1/2 h-[270px] w-[270px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-400/20" />
 
             {/* SHIELD */}
@@ -409,7 +453,7 @@ export default function Home() {
       </section>
 
       {/* ================= RECENT ACTIVITY ================= */}
-      <section className="bg-white px-6 py-20">
+      <section className="sq-reveal bg-white px-6 py-20">
 
         <div className="mx-auto max-w-[1180px]">
 
@@ -526,7 +570,7 @@ export default function Home() {
 
 
           {/* FEATURED PRODUCT */}
-          <div className="mt-12 grid overflow-hidden border border-blue-200 bg-white md:grid-cols-[1.3fr_0.7fr]">
+          <div className="sq-card mt-12 grid overflow-hidden border border-blue-200 bg-white md:grid-cols-[1.3fr_0.7fr]">
 
             <div className="p-8 md:p-10">
 
@@ -655,7 +699,7 @@ export default function Home() {
 
 
       {/* ================= SERVICES ================= */}
-      <section className="bg-white px-6 py-20">
+      <section className="sq-reveal bg-white px-6 py-20">
 
         <div className="mx-auto max-w-[1180px]">
 
@@ -686,7 +730,7 @@ export default function Home() {
             {services.map((service) => (
               <div
                 key={service.number}
-                className="group border border-blue-100 bg-white p-7 transition hover:border-blue-500 hover:shadow-md"
+                className="sq-card group border border-blue-100 bg-white p-7 transition hover:border-blue-500 hover:shadow-md"
               >
 
                 <div className="flex items-start justify-between">
@@ -729,7 +773,7 @@ export default function Home() {
 
 
       {/* ================= CAPACITY BUILDING ================= */}
-      <section className="bg-[#eef5fc] px-6 py-20">
+      <section className="sq-reveal bg-[#eef5fc] px-6 py-20">
 
         <div className="mx-auto max-w-[1180px]">
 
@@ -760,7 +804,7 @@ export default function Home() {
             {capacityPrograms.map((program) => (
               <div
                 key={program.number}
-                className="border border-blue-200 bg-white p-7"
+                className="sq-card border border-blue-200 bg-white p-7"
               >
 
                 <div className="flex items-center justify-between">
@@ -817,7 +861,7 @@ export default function Home() {
 
 
       {/* ================= COLLABORATORS ================= */}
-      <section className="bg-white px-6 py-20">
+      <section className="sq-reveal bg-white px-6 py-20">
 
         <div className="mx-auto max-w-[1180px] text-center">
 
@@ -937,7 +981,7 @@ export default function Home() {
 
 
       {/* ================= RECOGNISED ================= */}
-      <section className="bg-white px-6 py-20">
+      <section className="sq-reveal bg-white px-6 py-20">
 
         <div className="mx-auto max-w-[1180px]">
 
@@ -1066,7 +1110,7 @@ export default function Home() {
 
 
       {/* ================= CAREERS ================= */}
-      <section className="bg-[#eef5fc] px-6 py-20">
+      <section className="sq-reveal bg-[#eef5fc] px-6 py-20">
 
         <div className="mx-auto max-w-[1180px]">
 
@@ -1138,7 +1182,7 @@ export default function Home() {
 
 
       {/* ================= FOLLOW SAFEQBIT ================= */}
-      <section className="bg-white px-6 py-20">
+      <section className="sq-reveal bg-white px-6 py-20">
 
         <div className="mx-auto max-w-[1180px] text-center">
 
@@ -1239,7 +1283,7 @@ export default function Home() {
 
 
       {/* ================= FINAL CTA ================= */}
-      <section className="relative overflow-hidden bg-[#071b3b] px-6 py-24 text-white">
+      <section className="sq-reveal relative overflow-hidden bg-[#071b3b] px-6 py-24 text-white">
 
 {/* Background */}
 <div
