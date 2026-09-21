@@ -327,11 +327,12 @@ export default function CareersPage() {
                   </div>
 
 
-                  <button
-                    className="whitespace-nowrap bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-500"
+                  <Link
+                    href={`/careers/apply?position=${encodeURIComponent(opening.title)}`}
+                    className="whitespace-nowrap bg-blue-600 px-6 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/20"
                   >
                     Apply Now →
-                  </button>
+                  </Link>
 
                 </div>
 
@@ -363,12 +364,21 @@ export default function CareersPage() {
             reach out and introduce yourself.
           </p>
 
-          <Link
-            href="/contact"
-            className="mt-8 inline-block bg-blue-600 px-8 py-4 font-semibold hover:bg-blue-500"
-          >
-            Get In Touch →
-          </Link>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Link
+              href="/careers/apply?position=General%20Application"
+              className="bg-blue-600 px-8 py-4 font-semibold transition hover:-translate-y-0.5 hover:bg-blue-500"
+            >
+              Apply Anyway →
+            </Link>
+
+            <Link
+              href="/contact"
+              className="border border-blue-400/40 px-8 py-4 font-semibold text-blue-200 transition hover:border-blue-300 hover:text-white"
+            >
+              Get In Touch →
+            </Link>
+          </div>
 
         </div>
 
