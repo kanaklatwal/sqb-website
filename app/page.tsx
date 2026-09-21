@@ -113,6 +113,50 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white text-[#071b3b]">
 
+      <style>{`
+        @keyframes heroFadeUp {
+          from { opacity: 0; transform: translateY(24px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes heroFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        @keyframes glowPulse {
+          0%, 100% { opacity: .35; transform: scale(1); }
+          50% { opacity: .75; transform: scale(1.06); }
+        }
+        .hero-fade-up {
+          animation: heroFadeUp .8s ease-out both;
+        }
+        .hero-fade-up-delay-1 {
+          animation: heroFadeUp .8s .12s ease-out both;
+        }
+        .hero-fade-up-delay-2 {
+          animation: heroFadeUp .8s .24s ease-out both;
+        }
+        .hero-fade-up-delay-3 {
+          animation: heroFadeUp .8s .36s ease-out both;
+        }
+        .hero-float {
+          animation: heroFloat 5s ease-in-out infinite;
+        }
+        .hero-glow {
+          animation: glowPulse 4s ease-in-out infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-fade-up,
+          .hero-fade-up-delay-1,
+          .hero-fade-up-delay-2,
+          .hero-fade-up-delay-3,
+          .hero-float,
+          .hero-glow {
+            animation: none !important;
+          }
+        }
+      `}</style>
+
+
       {/* ================= NAVBAR ================= */}
       <header className="fixed left-0 top-0 z-50 w-full border-b border-blue-400/10 bg-[#071b3b]/95 backdrop-blur-md">
         <div className="mx-auto flex h-[78px] max-w-[1180px] items-center justify-between px-6">
@@ -186,34 +230,45 @@ export default function Home() {
       {/* ================= HERO ================= */}
       <section className="relative min-h-[760px] overflow-hidden bg-[#071b3b] pt-[78px]">
 
-        {/* GRID */}
-        <div className="absolute inset-0 opacity-30">
+        {/* HERO BACKGROUND */}
+<div className="absolute inset-0 bg-[#071b3b]" />
+
+{/* IMAGE — RIGHT SIDE ONLY */}
+<div className="absolute right-0 top-0 hidden h-full w-[58%] overflow-hidden lg:block">
+  <div
+    className="absolute inset-0 bg-cover bg-right bg-no-repeat"
+    style={{
+      backgroundImage: "url('/images/hero-bg.png')",
+    }}
+  />
+
+  {/* Darken image */}
+  <div className="absolute inset-0 bg-[#071b3b]/35" />
+
+  {/* Fade image into left side */}
+  <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#071b3b] via-[#071b3b]/80 to-transparent" />
+
+  {/* Bottom fade */}
+  <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#071b3b] to-transparent" />
+</div>
+
+        {/* Blue atmospheric glows */}
+        <div className="hero-glow absolute -right-40 top-20 h-[520px] w-[520px] rounded-full bg-blue-500/15 blur-[110px]" />
+        <div className="hero-glow absolute -left-40 bottom-0 h-[420px] w-[420px] rounded-full bg-cyan-500/10 blur-[100px]" />
+
+        {/* Grid */}
+        <div className="absolute inset-0 opacity-25">
           <div
             className="absolute inset-0"
             style={{
               backgroundImage: `
-                linear-gradient(
-                  rgba(65,130,220,.18) 1px,
-                  transparent 1px
-                ),
-                linear-gradient(
-                  90deg,
-                  rgba(65,130,220,.18) 1px,
-                  transparent 1px
-                )
+                linear-gradient(rgba(65,130,220,.18) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(65,130,220,.18) 1px, transparent 1px)
               `,
               backgroundSize: "60px 60px",
             }}
           />
         </div>
-
-        {/* BACKGROUND CIRCLES */}
-        <div className="absolute -right-[160px] top-[100px] h-[650px] w-[650px] rounded-full border border-blue-500/30" />
-
-        <div className="absolute -right-[50px] top-[180px] h-[500px] w-[500px] rounded-full border border-blue-500/25" />
-
-        <div className="absolute right-[50px] top-[260px] h-[350px] w-[350px] rounded-full border border-blue-500/20" />
-
 
         {/* HERO CONTAINER */}
         <div className="relative mx-auto grid min-h-[680px] max-w-[1180px] items-center gap-12 px-6 lg:grid-cols-2">
@@ -221,58 +276,35 @@ export default function Home() {
           {/* HERO LEFT */}
           <div className="max-w-[650px]">
 
-            {/* BADGE */}
-            <div className="mb-8 inline-flex items-center gap-3 border border-blue-400/40 px-5 py-2.5 text-xs font-semibold tracking-[2px] text-blue-300">
-              <span className="h-2 w-2 rounded-full bg-blue-500" />
+            <div className="hero-fade-up mb-8 inline-flex items-center gap-3 border border-blue-400/40 bg-[#071b3b]/35 px-5 py-2.5 text-xs font-semibold tracking-[2px] text-blue-200 backdrop-blur-sm">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-blue-400" />
               BE QUANTUM SAFE
             </div>
 
-
-            {/* SMALL HEADING */}
-            <div className="mb-5 flex items-center gap-4">
-
+            <div className="hero-fade-up-delay-1 mb-5 flex items-center gap-4">
               <span className="h-[2px] w-9 bg-blue-500" />
-
-              <span className="text-sm font-semibold tracking-[3px] text-blue-400">
+              <span className="text-sm font-semibold tracking-[3px] text-blue-300">
                 RESEARCH-POWERED CYBERSECURITY
               </span>
-
             </div>
 
-
-            {/* MAIN HEADING */}
-            <h1 className="max-w-[620px] text-4xl font-bold leading-[1.12] tracking-tight text-white md:text-[46px]">
-
+            <h1 className="hero-fade-up-delay-1 max-w-[620px] text-4xl font-bold leading-[1.12] tracking-tight text-white md:text-[46px]">
               If Excellence is your
               <br />
-
               Preference, Choose our
               <br />
-
-              <span className="text-blue-500">
-                Research-Powered
-              </span>
-
+              <span className="text-blue-400">Research-Powered</span>
               <br />
-
               Cybersecurity Services!
-
             </h1>
 
-
-            {/* DESCRIPTION */}
-            <p className="mt-7 max-w-[590px] text-base leading-7 text-blue-200 md:text-[17px]">
-
+            <p className="hero-fade-up-delay-2 mt-7 max-w-[590px] text-base leading-7 text-blue-100 md:text-[17px]">
               SafeQbit Technologies delivers research-powered cybersecurity
               solutions to help organisations prepare for evolving digital
               threats and the quantum era.
-
             </p>
 
-
-            {/* SERVICE TAGS */}
-            <div className="mt-7 flex max-w-[620px] flex-wrap gap-2.5">
-
+            <div className="hero-fade-up-delay-2 mt-7 flex max-w-[620px] flex-wrap gap-2.5">
               {[
                 "Post-Quantum Cryptography",
                 "Cybersecurity Consulting",
@@ -281,91 +313,53 @@ export default function Home() {
               ].map((item) => (
                 <span
                   key={item}
-                  className="border border-blue-400/50 px-4 py-2 text-xs text-blue-300"
+                  className="border border-blue-400/50 bg-[#071b3b]/45 px-4 py-2 text-xs text-blue-100 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:bg-blue-500/15"
                 >
-                  <span className="mr-2 text-blue-500">
-                    •
-                  </span>
+                  <span className="mr-2 text-blue-400">•</span>
                   {item}
                 </span>
               ))}
-
             </div>
 
-
-            {/* BUTTONS */}
-            <div className="mt-8 flex flex-wrap items-center gap-5">
-
+            <div className="hero-fade-up-delay-3 mt-8 flex flex-wrap items-center gap-5">
               <Link
                 href="#products"
-                className="bg-blue-600 px-8 py-4 text-sm font-semibold text-white transition hover:bg-blue-500"
+                className="bg-blue-600 px-8 py-4 text-sm font-semibold text-white transition duration-300 hover:-translate-y-1 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/30"
               >
                 Explore Products
-                <span className="ml-3">
-                  →
-                </span>
+                <span className="ml-3">→</span>
               </Link>
-
 
               <Link
                 href="/contact"
-                className="text-sm font-semibold text-blue-300 transition hover:text-white"
+                className="text-sm font-semibold text-blue-200 transition duration-300 hover:translate-x-1 hover:text-white"
               >
                 Connect With Us
-                <span className="ml-3">
-                  →
-                </span>
+                <span className="ml-3">→</span>
               </Link>
-
             </div>
 
-
-            {/* CREDENTIALS */}
-            <div className="mt-12 flex flex-wrap items-center gap-5 border-t border-blue-400/20 pt-7 text-xs font-semibold text-blue-400">
-
-              <span>
-                ✓ DPIIT Registered
-              </span>
-
-              <span className="text-blue-600">
-                |
-              </span>
-
-              <span>
-                ✓ MeitY Facilitated
-              </span>
-
-              <span className="text-blue-600">
-                |
-              </span>
-
-              <span>
-                ✓ National Award Winner
-              </span>
-
+            <div className="hero-fade-up-delay-3 mt-12 flex flex-wrap items-center gap-5 border-t border-blue-400/20 pt-7 text-xs font-semibold text-blue-200">
+              <span>✓ DPIIT Registered</span>
+              <span className="text-blue-500">|</span>
+              <span>✓ MeitY Facilitated</span>
+              <span className="text-blue-500">|</span>
+              <span>✓ National Award Winner</span>
             </div>
-
           </div>
-
 
           {/* HERO RIGHT */}
           <div className="relative hidden h-[550px] lg:block">
 
-            {/* OUTER CIRCLE */}
-            <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-500/30" />
-
-            {/* SECOND CIRCLE */}
-            <div className="absolute left-1/2 top-1/2 h-[390px] w-[390px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-500/30" />
-
-            {/* THIRD CIRCLE */}
-            <div className="absolute left-1/2 top-1/2 h-[270px] w-[270px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-500/20" />
-
+            <div className="hero-float absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-400/30" />
+            <div className="absolute left-1/2 top-1/2 h-[390px] w-[390px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-400/30" />
+            <div className="absolute left-1/2 top-1/2 h-[270px] w-[270px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-400/20" />
 
             {/* SHIELD */}
-            <div className="absolute left-1/2 top-1/2 h-[330px] w-[280px] -translate-x-1/2 -translate-y-1/2">
+            <div className="hero-float absolute left-1/2 top-1/2 h-[330px] w-[280px] -translate-x-1/2 -translate-y-1/2">
 
               <div
-                className="absolute inset-0 border-2 border-blue-500/70"
+                className="absolute inset-0 border-2 border-blue-400/70"
                 style={{
                   clipPath:
                     "polygon(50% 0%,100% 20%,92% 68%,75% 86%,50% 100%,25% 86%,8% 68%,0% 20%)",
@@ -373,75 +367,46 @@ export default function Home() {
               />
 
               <div
-                className="absolute inset-[25px] border border-blue-500/50"
+                className="absolute inset-[25px] border border-blue-400/50"
                 style={{
                   clipPath:
                     "polygon(50% 0%,100% 20%,92% 68%,75% 86%,50% 100%,25% 86%,8% 68%,0% 20%)",
                 }}
               />
 
-
-              {/* LOCK */}
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="mx-auto h-10 w-9 rounded-t-full border-2 border-blue-400 border-b-0" />
 
-                <div className="mx-auto h-10 w-9 rounded-t-full border-2 border-blue-500 border-b-0" />
-
-                <div className="relative -mt-1 h-16 w-20 border-2 border-blue-500 bg-[#071b3b]">
-
-                  <div className="absolute left-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-blue-500" />
-
+                <div className="relative -mt-1 h-16 w-20 border-2 border-blue-400 bg-[#071b3b]/80 backdrop-blur-sm">
+                  <div className="absolute left-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-blue-400" />
                 </div>
-
               </div>
-
             </div>
-
 
             {/* QUANTUM NODES */}
-            <div className="absolute left-[20%] top-[28%] h-3 w-3 rounded-full bg-blue-500 shadow-[0_0_15px_#2563eb]" />
+            <div className="absolute left-[20%] top-[28%] h-3 w-3 animate-pulse rounded-full bg-blue-400 shadow-[0_0_15px_#2563eb]" />
+            <div className="absolute right-[18%] top-[20%] h-3 w-3 animate-pulse rounded-full bg-blue-400 shadow-[0_0_15px_#2563eb]" />
+            <div className="absolute bottom-[28%] left-[25%] h-3 w-3 animate-pulse rounded-full bg-blue-400 shadow-[0_0_15px_#2563eb]" />
+            <div className="absolute bottom-[20%] right-[25%] h-3 w-3 animate-pulse rounded-full bg-blue-400 shadow-[0_0_15px_#2563eb]" />
 
-            <div className="absolute right-[18%] top-[20%] h-3 w-3 rounded-full bg-blue-500 shadow-[0_0_15px_#2563eb]" />
-
-            <div className="absolute bottom-[28%] left-[25%] h-3 w-3 rounded-full bg-blue-500 shadow-[0_0_15px_#2563eb]" />
-
-            <div className="absolute bottom-[20%] right-[25%] h-3 w-3 rounded-full bg-blue-500 shadow-[0_0_15px_#2563eb]" />
-
-
-            {/* GRAPHIC LABELS */}
-            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-8 text-xs font-semibold">
-
-              <span className="text-blue-400">
-                SECURITY ARCHITECTURE
-              </span>
-
+            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-8 text-xs font-semibold text-white">
+              <span className="text-blue-300">SECURITY ARCHITECTURE</span>
               <span>
                 <b>PQC</b>{" "}
-                <small className="ml-1 text-blue-400">
-                  Ready
-                </small>
+                <small className="ml-1 text-blue-300">Ready</small>
               </span>
-
               <span>
                 <b>Gov.</b>{" "}
-                <small className="ml-1 text-blue-400">
-                  Certified
-                </small>
+                <small className="ml-1 text-blue-300">Certified</small>
               </span>
-
               <span>
                 <b>R&amp;D</b>{" "}
-                <small className="ml-1 text-blue-400">
-                  Backed
-                </small>
+                <small className="ml-1 text-blue-300">Backed</small>
               </span>
-
             </div>
-
           </div>
-
         </div>
       </section>
-
 
       {/* ================= RECENT ACTIVITY ================= */}
       <section className="bg-white px-6 py-20">
@@ -1276,60 +1241,71 @@ export default function Home() {
       {/* ================= FINAL CTA ================= */}
       <section className="relative overflow-hidden bg-[#071b3b] px-6 py-24 text-white">
 
-        <div className="absolute -left-40 top-0 h-[450px] w-[450px] rounded-full border border-blue-500/20" />
+{/* Background */}
+<div
+  className="absolute inset-0 bg-cover bg-center opacity-20"
+  style={{
+    backgroundImage: "url('/images/hero-bg.png')",
+  }}
+/>
 
-        <div className="absolute -right-40 bottom-0 h-[450px] w-[450px] rounded-full border border-blue-500/20" />
+{/* Overlay */}
+<div className="absolute inset-0 bg-[#071b3b]/85" />
 
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(59,130,246,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,.5) 1px, transparent 1px)",
-            backgroundSize: "70px 70px",
-          }}
-        />
+{/* Decorative circles */}
+<div className="absolute -left-40 top-0 h-[450px] w-[450px] rounded-full border border-blue-500/20" />
 
+<div className="absolute -right-40 bottom-0 h-[450px] w-[450px] rounded-full border border-blue-500/20" />
 
-        <div className="relative mx-auto max-w-[750px] text-center">
+{/* Grid */}
+<div
+  className="absolute inset-0 opacity-10"
+  style={{
+    backgroundImage:
+      "linear-gradient(rgba(59,130,246,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,.5) 1px, transparent 1px)",
+    backgroundSize: "70px 70px",
+  }}
+/>
 
-          <p className="text-sm font-semibold tracking-[3px] text-blue-400">
-            READY TO GO QUANTUM SAFE?
-          </p>
+{/* Content */}
+<div className="relative mx-auto max-w-[750px] text-center">
 
-          <h2 className="mt-5 text-3xl font-bold leading-tight md:text-5xl">
-            EXPLORE THE QUANTUM-
-            <br />
-            SAFE WORLD WITH US!
-          </h2>
+  <p className="text-sm font-semibold tracking-[3px] text-blue-400">
+    READY TO GO QUANTUM SAFE?
+  </p>
 
-          <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-blue-200">
-            Protect your organisation with research-powered cybersecurity
-            products, consulting and capacity-building solutions built for
-            the quantum era.
-          </p>
+  <h2 className="mt-5 text-3xl font-bold leading-tight md:text-5xl">
+    EXPLORE THE QUANTUM-
+    <br />
+    SAFE WORLD WITH US!
+  </h2>
 
+  <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-blue-200">
+    Protect your organisation with research-powered cybersecurity
+    products, consulting and capacity-building solutions built for
+    the quantum era.
+  </p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-5">
+  <div className="mt-8 flex flex-wrap justify-center gap-5">
 
-            <Link
-              href="/products"
-              className="bg-blue-600 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-blue-500"
-            >
-              Explore Products →
-            </Link>
+    <Link
+      href="/products"
+      className="bg-blue-600 px-7 py-3.5 text-sm font-semibold text-white transition duration-300 hover:-translate-y-1 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/25"
+    >
+      Explore Products →
+    </Link>
 
-            <Link
-              href="/contact"
-              className="px-4 py-3.5 text-sm font-semibold text-blue-300 transition hover:text-white"
-            >
-              Connect With Us →
-            </Link>
+    <Link
+      href="/contact"
+      className="px-4 py-3.5 text-sm font-semibold text-blue-300 transition hover:text-white"
+    >
+      Connect With Us →
+    </Link>
 
-          </div>
+  </div>
 
-        </div>
-
-      </section>
+</div>
+</section>
 
 
       {/* ================= FOOTER ================= */}
