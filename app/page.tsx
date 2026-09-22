@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 
 const services = [
@@ -110,6 +113,25 @@ const careers = [
 ];
 
 export default function Home() {
+  const [selectedService, setSelectedService] = useState("01");
+  const [selectedRecognition, setSelectedRecognition] = useState(0);
+  const [heroShift, setHeroShift] = useState({ x: 0, y: 0 });
+
+  const recognitionItems = [
+    { label: "R&D / Major Milestone", number: "01", title: "Cybersecurity Grand Challenge", description: "Recognition associated with cybersecurity innovation and technology development.", tag: "NATIONAL AWARD" },
+    { label: "Final / National Recognition", number: "02", title: "National Cybersecurity Recognition", description: "A company-level recognition highlight can be presented here once the approved details are available.", tag: "RECOGNITION" },
+    { label: "Facilitating Cybersecurity, MeitY", number: "03", title: "Cybersecurity Facilitation", description: "A verified company-level facilitation or initiative can be presented here once the approved details are available.", tag: "RECOGNITION" },
+  ];
+
+  const activeRecognition = recognitionItems[selectedRecognition];
+
+  const handleHeroMove = (event: React.MouseEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 10;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 8;
+    setHeroShift({ x, y });
+  };
+
   return (
     <main className="min-h-screen bg-white text-[#071b3b]">
 
@@ -271,7 +293,11 @@ export default function Home() {
 
 
       {/* ================= HERO ================= */}
-      <section className="relative min-h-[760px] overflow-hidden bg-[#071b3b] pt-[78px]">
+      <section
+        className="relative min-h-[760px] overflow-hidden bg-[#071b3b] pt-[78px]"
+        onMouseMove={handleHeroMove}
+        onMouseLeave={() => setHeroShift({ x: 0, y: 0 })}
+      >
 
         {/* HERO BASE */}
         <div className="absolute inset-0 bg-[#071b3b]" />
@@ -282,8 +308,11 @@ export default function Home() {
             it from overlapping the actual Hero copy. */}
         <div className="absolute right-0 top-0 hidden h-full w-[58%] overflow-hidden lg:block">
           <div
-            className="absolute inset-0 bg-cover bg-right bg-no-repeat"
-            style={{ backgroundImage: "url('/images/hero-bg.png')" }}
+            className="absolute inset-[-12px] bg-cover bg-right bg-no-repeat transition-transform duration-300 ease-out"
+            style={{
+              backgroundImage: "url('/images/hero-bg.png')",
+              transform: `translate(${heroShift.x}px, ${heroShift.y}px)`,
+            }}
           />
 
           {/* Keep the image subtle */}
@@ -727,11 +756,20 @@ export default function Home() {
 
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
 
-            {services.map((service) => (
-              <div
-                key={service.number}
-                className="sq-card group border border-blue-100 bg-white p-7 transition hover:border-blue-500 hover:shadow-md"
-              >
+            {services.map((service) => {
+              const isSelected = selectedService === service.number;
+
+              return (
+                <button
+                  key={service.number}
+                  type="button"
+                  onClick={() => setSelectedService(service.number)}
+                  className={`sq-card group w-full border bg-white p-7 text-left transition ${
+                    isSelected
+                      ? "border-blue-500 shadow-lg shadow-blue-500/10"
+                      : "border-blue-100 hover:border-blue-500 hover:shadow-md"
+                  }`}
+                >
 
                 <div className="flex items-start justify-between">
 
@@ -756,15 +794,17 @@ export default function Home() {
                 </p>
 
 
-                <Link
-                  href="/services"
-                  className="mt-6 inline-block text-sm font-semibold text-blue-600"
+                <span
+                  className={`mt-6 inline-block text-sm font-semibold ${
+                    isSelected ? "text-blue-700" : "text-blue-600"
+                  }`}
                 >
-                  Explore →
-                </Link>
+                  {isSelected ? "Selected ✓" : "Explore →"}
+                </span>
 
-              </div>
-            ))}
+                </button>
+              );
+            })}
 
           </div>
 
@@ -1009,100 +1049,53 @@ export default function Home() {
 
           {/* FEATURED AWARD */}
           <div className="mt-10 grid overflow-hidden border border-blue-200 md:grid-cols-[0.7fr_1.3fr]">
-
             <div className="flex min-h-[280px] items-center justify-center bg-[#eef5fc]">
-
               <div className="text-center">
-
-                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-blue-400 text-3xl text-blue-500">
+                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-blue-400 text-3xl text-blue-500 transition-transform duration-500 hover:scale-110">
                   ☆
                 </div>
-
-                <p className="mt-5 text-sm font-semibold text-blue-600">
-                  NATIONAL RECOGNITION
-                </p>
-
-                <p className="mt-2 text-xs text-slate-500">
-                  Cybersecurity Innovation
-                </p>
-
+                <p className="mt-5 text-sm font-semibold text-blue-600">NATIONAL RECOGNITION</p>
+                <p className="mt-2 text-xs text-slate-500">Cybersecurity Innovation</p>
               </div>
-
             </div>
-
 
             <div className="p-8 md:p-10">
-
               <div className="flex gap-3">
-
-                <span className="bg-blue-600 px-3 py-1.5 text-xs text-white">
-                  NATIONAL AWARD
-                </span>
-
-                <span className="px-3 py-1.5 text-xs text-slate-400">
-                  Cybersecurity
-                </span>
-
+                <span className="bg-blue-600 px-3 py-1.5 text-xs text-white">{activeRecognition.tag}</span>
+                <span className="px-3 py-1.5 text-xs text-slate-400">Cybersecurity</span>
               </div>
-
-
-              <div className="mt-7 text-3xl font-light text-blue-100">
-                01
-              </div>
-
-
-              <h3 className="mt-2 text-2xl font-bold">
-                Cybersecurity Grand Challenge
-              </h3>
-
-
-              <p className="mt-4 text-sm leading-6 text-slate-500">
-                Recognition associated with cybersecurity innovation and
-                technology development.
-              </p>
-
-
-              <div className="mt-6 text-sm font-semibold text-blue-600">
-                View Recognition →
-              </div>
-
+              <div className="mt-7 text-3xl font-light text-blue-100">{activeRecognition.number}</div>
+              <h3 className="mt-2 text-2xl font-bold">{activeRecognition.title}</h3>
+              <p className="mt-4 text-sm leading-6 text-slate-500">{activeRecognition.description}</p>
+              <div className="mt-6 text-sm font-semibold text-blue-600">View Recognition →</div>
             </div>
-
           </div>
 
-
-          {/* SMALL CARDS */}
           <div className="mt-3 grid gap-3 md:grid-cols-3">
-
-            {[
-              "R&D / Major Milestone",
-              "Final / National Recognition",
-              "Facilitating Cybersecurity, MeitY",
-            ].map((item, index) => (
-              <div
-                key={item}
-                className="border border-blue-100 p-6"
-              >
-
-                <div className="flex justify-between">
-
-                  <span className="text-2xl font-light text-blue-200">
-                    0{index + 1}
+            {recognitionItems.map((item, index) => {
+              const isSelected = selectedRecognition === index;
+              return (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => setSelectedRecognition(index)}
+                  className={`border p-6 text-left transition ${
+                    isSelected
+                      ? "border-blue-500 bg-blue-50 shadow-md"
+                      : "border-blue-100 bg-white hover:border-blue-400 hover:-translate-y-1"
+                  }`}
+                >
+                  <div className="flex justify-between">
+                    <span className="text-2xl font-light text-blue-200">{item.number}</span>
+                    <span className="text-xs text-blue-500">RECOGNITION</span>
+                  </div>
+                  <p className="mt-5 text-sm font-semibold">{item.label}</p>
+                  <span className="mt-4 inline-block text-xs font-semibold text-blue-600">
+                    {isSelected ? "Selected ✓" : "View →"}
                   </span>
-
-                  <span className="text-xs text-blue-500">
-                    RECOGNITION
-                  </span>
-
-                </div>
-
-                <p className="mt-5 text-sm font-semibold">
-                  {item}
-                </p>
-
-              </div>
-            ))}
-
+                </button>
+              );
+            })}
           </div>
 
         </div>
