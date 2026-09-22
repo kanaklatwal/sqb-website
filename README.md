@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SafeQbit Website
+
+Official website for SafeQbit Technologies, built using Next.js, TypeScript and Tailwind CSS.
+
+## Live Website
+
+Visit the deployed website:
+
+https://sqb-website-six.vercel.app/
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
 
 ```bash
+npm install
+
+Then, run the development server:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 with your browser to see the website.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The page will automatically update as you edit the files.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tech Stack
+Next.js
+TypeScript
+React
+Tailwind CSS
+Next.js App Router
+Vercel
+Project Structure
+safeqbit-website/
+├── app/
+│   ├── about/
+│   ├── careers/
+│   │   └── apply/
+│   ├── contact/
+│   ├── products/
+│   ├── services/
+│   ├── page.tsx
+│   └── globals.css
+├── public/
+│   └── images/
+├── package.json
+└── README.md
+Available Pages
+Home
+About
+Products
+Services
+Careers
+Career Application
+Contact
+Features
+Responsive website design
+Quantum-inspired cybersecurity theme
+Animated homepage sections
+Interactive service cards
+Product showcase
+Collaborators section
+Career opportunities section
+Career application form
+Contact form
+Responsive navigation
+Vercel deployment
+Deployment
 
-## Learn More
+The website is deployed using Vercel.
 
-To learn more about Next.js, take a look at the following resources:
+Live URL:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+https://sqb-website-six.vercel.app/
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Learn More
+Next.js Documentation
+Next.js Learn
+Tailwind CSS Documentation
+Vercel Documentation
 
-## Deploy on Vercel
+**Bas existing `README.md` ka pura content replace karke ye paste kar**, then:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+git add README.md
+git commit -m "Update project README"
+git push
