@@ -189,9 +189,9 @@ export default function Home() {
                 className="h-[330px] w-auto object-contain drop-shadow-[0_0_35px_rgba(66,174,245,0.35)]"
               />
 
-              <h2 className="mt-8 text-center text-[38px] font-bold md:text-[46px]">
+              {/* <h2 className="mt-8 text-center text-[38px] font-bold md:text-[46px]">
                 Be Quantum Safe
-              </h2>
+              </h2> */}
 
             </div>
 
