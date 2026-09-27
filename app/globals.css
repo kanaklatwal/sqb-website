@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0c1651;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -18,19 +18,27 @@
 
 html {
   scroll-behavior: smooth;
+  background: #06145f;
 }
 
 body {
   margin: 0;
-  background: var(--background);
-  color: var(--foreground);
+  background: #06145f;
+  color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 button {
   font: inherit;
+}
+
+/* SafeQbit dark blue theme */
+::selection {
+  background: #45aaf2;
+  color: #ffffff;
 }
