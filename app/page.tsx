@@ -75,67 +75,86 @@ const binaryColumns = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-[#07175f]">
+    <main className="safeqbit-page">
 
-      {/* ================= NAVBAR ================= */}
-      <header className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-[#07175f] shadow-sm">
-        <div className="mx-auto flex h-[96px] max-w-[1500px] items-center justify-between px-8">
+      {/* =====================================================
+          NAVBAR
+      ===================================================== */}
 
-          {/* SAFEQBIT LOGO + COMPANY NAME */}
-          <Link
-            href="/"
-            className="flex items-center gap-[12px]"
-          >
+      <header className="site-header">
+        <div className="site-header-inner">
+
+          <Link href="/" className="site-brand">
+
             <img
               src="/logo.png"
               alt="SafeQbit Technologies"
-              className="h-[64px] w-auto object-contain"
+              className="site-logo"
             />
 
-            <div className="flex flex-col justify-center leading-none">
-              <span className="text-[27px] font-bold tracking-[-0.5px] text-white">
+            <div className="site-company-name">
+              <span className="company-title">
                 SafeQbit
               </span>
 
-              <span className="mt-[5px] text-[13px] font-medium tracking-[1.8px] text-white/90">
+              <span className="company-subtitle">
                 TECHNOLOGIES PVT LTD
               </span>
             </div>
+
           </Link>
 
-          {/* NAVIGATION */}
-          <nav className="hidden items-center gap-12 md:flex">
-            {[
-              ["Home", "/"],
-              ["About", "/about"],
-              ["Products", "/products"],
-              ["Contact Us", "/contact"],
-            ].map(([label, href], i) => (
-              <Link
-                key={label}
-                href={href}
-                className="relative py-3 text-[17px] font-semibold text-white transition hover:text-[#49b8ff]"
-              >
-                {label}
+          <nav className="site-nav">
 
-                {i === 0 && (
-                  <span className="absolute bottom-0 left-0 h-[4px] w-full rounded-full bg-[#49b8ff]" />
-                )}
-              </Link>
-            ))}
+            <Link
+              href="/"
+              className="nav-link active-link"
+            >
+              Home
+            </Link>
+
+            <Link
+              href="/about"
+              className="nav-link"
+            >
+              About
+            </Link>
+
+            <Link
+              href="/products"
+              className="nav-link"
+            >
+              Products
+            </Link>
+
+            <Link
+              href="/contact"
+              className="nav-link"
+            >
+              Contact Us
+            </Link>
+
           </nav>
+
         </div>
       </header>
 
 
-      {/* ================= HERO ================= */}
-      <section className="relative min-h-[790px] overflow-hidden bg-[#020d42] pt-[96px]">
+      {/* =====================================================
+          HERO
+      ===================================================== */}
 
-        {/* DARK REAL WEBSITE STYLE BACKGROUND */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#081038] via-[#0d1a51] to-[#060c29]" />
+      <section className="hero-section">
+
+        {/* DARK BLUE BACKGROUND */}
+
+        <div className="hero-background" />
+
 
         {/* BINARY BACKGROUND */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+
+        <div className="binary-background">
+
           {binaryColumns.map((column, index) => (
             <div
               key={index}
@@ -144,300 +163,352 @@ export default function Home() {
                 left: `${index * 5.2}%`,
                 animationDelay: `${-(index * 1.7)}s`,
                 animationDuration: `${12 + (index % 5) * 2}s`,
-                opacity: 0.24 + (index % 4) * 0.045,
+                opacity: 0.20 + (index % 4) * 0.04,
               }}
             >
               {column.split("").map((digit, digitIndex) => (
-                <span key={digitIndex}>{digit}</span>
+                <span key={digitIndex}>
+                  {digit}
+                </span>
               ))}
             </div>
           ))}
+
         </div>
 
-        {/* BLUE GLOW */}
-        <div className="pointer-events-none absolute -left-40 top-[35%] h-[500px] w-[500px] rounded-full bg-blue-500/15 blur-[140px]" />
 
-        <div className="pointer-events-none absolute right-[-100px] top-[30%] h-[600px] w-[600px] rounded-full bg-blue-400/10 blur-[150px]" />
+        {/* BLUE GLOWS */}
+
+        <div className="hero-glow hero-glow-left" />
+
+        <div className="hero-glow hero-glow-right" />
 
 
         {/* HERO CONTENT */}
-        <div className="relative z-10 mx-auto grid min-h-[690px] max-w-[1500px] grid-cols-1 items-center gap-10 px-8 py-16 lg:grid-cols-2">
+
+        <div className="hero-content">
 
           {/* LEFT */}
-          <div className="max-w-[760px]">
 
-            <p className="mb-6 text-[20px] font-medium text-white md:text-[22px]">
+          <div className="hero-left">
+
+            <p className="hero-kicker">
               If Excellence is your Preference,
             </p>
 
-            <h1 className="text-[52px] font-extrabold leading-[1.04] tracking-[-2px] text-white md:text-[68px] lg:text-[70px]">
 
-              <span className="text-white">
+            <h1 className="hero-title">
+
+              <span className="hero-white">
                 Choose our
               </span>
 
-              <br />
-
-              <span className="text-[#42aef5]">
+              <span className="hero-blue">
                 Research-Powered
               </span>
 
-              <br />
-
-              <span className="text-white">
+              <span className="hero-white">
                 Cybersecurity
               </span>
 
-              <br />
-
-              <span className="text-white">
+              <span className="hero-white">
                 Services!
               </span>
 
             </h1>
 
-            <p className="mt-8 max-w-[720px] text-[18px] leading-8 text-white/85 md:text-[20px]">
-              We build a knowledge-driven community focused on awareness,
-              education, and the adoption of post-quantum cybersecurity
-              technologies.
+
+            <p className="hero-description">
+              We build a knowledge-driven community focused on
+              awareness, education, and the adoption of post-quantum
+              cybersecurity technologies.
             </p>
 
 
             {/* TAGS */}
-            <div className="mt-8 flex flex-wrap gap-4">
-              {[
-                "Post-Quantum Readiness",
-                "Security Assessments",
-                "Training & Workshops",
-              ].map((x) => (
-                <span
-                  key={x}
-                  className="rounded-full border border-white/25 bg-white/[0.08] px-6 py-3 text-sm font-semibold text-white backdrop-blur-md"
-                >
-                  {x}
-                </span>
-              ))}
+
+            <div className="hero-tags">
+
+              <span className="hero-tag">
+                Post-Quantum Readiness
+              </span>
+
+              <span className="hero-tag">
+                Security Assessments
+              </span>
+
+              <span className="hero-tag">
+                Training & Workshops
+              </span>
+
             </div>
 
 
-            {/* CONNECT BUTTON */}
-            <div className="mt-10">
+            {/* CONNECT */}
+
+            <div className="connect-wrapper">
+
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-[17px] font-bold text-[#07145f] transition hover:scale-105 hover:bg-[#42aef5] hover:text-white"
+                className="connect-button"
               >
-                Connect Now
+                <span>
+                  Connect Now
+                </span>
 
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#07145f] text-sm text-white">
+                <span className="connect-arrow">
                   →
                 </span>
+
               </Link>
+
             </div>
 
           </div>
 
 
-          {/* RIGHT LOGO */}
-          <div className="relative flex min-h-[580px] items-center justify-center">
+          {/* RIGHT */}
 
-            <div className="absolute h-[480px] w-[480px] rounded-full bg-blue-500/15 blur-[120px]" />
+          <div className="hero-right">
+
+            <div className="hero-logo-glow" />
 
             <img
               src="/logo.png"
               alt="SafeQbit - Be Quantum Safe"
-              className="relative z-10 h-[410px] w-auto object-contain drop-shadow-[0_0_45px_rgba(66,174,245,0.35)]"
+              className="hero-main-logo"
             />
 
           </div>
 
         </div>
+
       </section>
 
 
-      {/* ================= RECENT ACTIVITY ================= */}
-      <section className="bg-[#f3f7ff] px-6 py-20">
-        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8 lg:grid-cols-[1.55fr_1fr]">
+      {/* =====================================================
+          RECENT ACTIVITY
+      ===================================================== */}
 
-          <div className="flex min-h-[500px] items-center justify-center overflow-hidden rounded-[24px] bg-white shadow-sm">
+      <section className="light-section recent-section">
+
+        <div className="two-column-container">
+
+          <div className="activity-image">
+
             <img
               src="/images/recent-activity.jpg"
               alt="SafeQbit recent activity"
-              className="h-full w-full object-cover"
             />
+
           </div>
 
-          <div className="rounded-[24px] bg-[#07175f] p-7 text-white shadow-lg">
 
-            <div className="mb-6 flex items-center justify-between border-b border-white/15 pb-5">
-              <h2 className="text-2xl font-extrabold">
+          <div className="activity-panel">
+
+            <div className="activity-header">
+
+              <h2>
                 Recent Activity
               </h2>
 
-              <span className="rounded-full bg-[#49b8ff] px-4 py-2 text-xs font-bold text-[#07175f]">
+              <span>
                 Updates
               </span>
+
             </div>
 
-            <div className="space-y-4">
+
+            <div className="activity-list">
+
               {activities.map((item) => (
                 <article
                   key={item}
-                  className="rounded-2xl border border-white/10 bg-[#12277e] p-4"
+                  className="activity-card"
                 >
-                  <div className="flex gap-3">
 
-                    <span className="shrink-0 rounded-xl bg-[#1e3b92] px-3 py-2">
-                      🏆
-                    </span>
+                  <div className="activity-icon">
+                    🏆
+                  </div>
 
-                    <div>
-                      <h3 className="text-[15px] font-bold leading-6">
-                        {item}
-                      </h3>
+                  <div>
 
-                      <button className="mt-1 text-sm font-bold text-[#49b8ff]">
-                        Read more
-                      </button>
-                    </div>
+                    <h3>
+                      {item}
+                    </h3>
+
+                    <button>
+                      Read more
+                    </button>
 
                   </div>
+
                 </article>
               ))}
+
             </div>
 
           </div>
+
         </div>
+
       </section>
 
 
-      {/* ================= NQM + RECOGNITION ================= */}
-      <section className="bg-white px-6 py-20">
+      {/* =====================================================
+          NQM + RECOGNITION
+      ===================================================== */}
 
-        <div className="mx-auto max-w-[1200px] text-center">
+      <section className="white-section">
+
+        <div className="section-intro">
 
           <h2 className="section-title">
             Research Funded by National Quantum Mission
           </h2>
 
           <p className="section-subtitle">
-            SafeQbit-Executing a National Quantum Mission (NQM) Supported
-            Project on Quantum-Safe IoT Authentication
+            SafeQbit-Executing a National Quantum Mission (NQM)
+            Supported Project on Quantum-Safe IoT Authentication
           </p>
 
 
-          <h2 className="section-title mt-24">
+          <h2 className="section-title section-gap">
             Recognized Among The Best Cyber Security Service Providers.
           </h2>
 
-          <p className="section-subtitle max-w-[1000px]">
-            Safeqbit Startup Recognition by the Data Security Council of India
-            (DSCI) and Ministry of Electronics & Information Technology
-            (MeitY), GoI at CSGC2.0 as MVP Stage Winners, Final Product Stage
-            Winners, and facilitated by the Secretary, MeitY 🏆
+          <p className="section-subtitle">
+            Safeqbit Startup Recognition by the Data Security Council
+            of India (DSCI) and Ministry of Electronics & Information
+            Technology (MeitY), GoI at CSGC2.0 as MVP Stage Winners,
+            Final Product Stage Winners, and facilitated by the
+            Secretary, MeitY 🏆
           </p>
 
         </div>
 
 
-        <div className="mx-auto mt-14 grid max-w-[1400px] grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="recognition-grid">
 
           {[
             ["🏅", "MVP Stage Winners", "/images/mvp-winner.jpg"],
             ["🏆", "Final Product Stage Winners", "/images/final-winner.jpg"],
             ["🏆", "Facilitated by Secretary, MeitY", "/images/facilitated.jpg"],
           ].map(([icon, title, image]) => (
+
             <div
               key={title}
-              className="overflow-hidden rounded-[24px] bg-[#f7f9ff] p-5 shadow-[0_10px_40px_rgba(7,23,95,0.08)]"
+              className="recognition-card"
             >
 
-              <h3 className="mb-5 text-center text-xl font-extrabold">
+              <h3>
                 {icon} {title}
               </h3>
 
-              <div className="flex min-h-[320px] items-center justify-center overflow-hidden rounded-2xl bg-white">
+              <div className="recognition-image">
                 <img
                   src={image}
                   alt={title}
-                  className="max-h-[360px] w-full object-contain"
                 />
               </div>
 
             </div>
+
           ))}
 
         </div>
+
       </section>
 
 
-      {/* ================= SERVICES ================= */}
-      <section className="bg-[#f3f7ff] px-6 py-24">
+      {/* =====================================================
+          SERVICES
+      ===================================================== */}
 
-        <div className="mx-auto max-w-[1400px] text-center">
+      <section className="light-section services-section">
+
+        <div className="section-intro">
 
           <h2 className="section-title">
             Our Services
           </h2>
 
           <p className="section-subtitle">
-            We are a team of innovative and proactive digital security experts
-            delivering research-driven cybersecurity solutions.
+            We are a team of innovative and proactive digital
+            security experts delivering research-driven
+            cybersecurity solutions.
           </p>
 
-
-          <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
-
-            {services.map((service, i) => (
-              <div
-                key={service}
-                className={`flex min-h-[165px] items-center justify-center rounded-2xl bg-white px-7 text-center text-xl font-semibold shadow-[0_8px_30px_rgba(7,23,95,0.06)] ${
-                  i === 2 ? "border border-[#49b8ff]" : ""
-                }`}
-              >
-                {service}
-              </div>
-            ))}
-
-          </div>
         </div>
+
+
+        <div className="services-grid">
+
+          {services.map((service, index) => (
+
+            <div
+              key={service}
+              className={`service-card ${
+                index === 2 ? "service-card-active" : ""
+              }`}
+            >
+              {service}
+            </div>
+
+          ))}
+
+        </div>
+
       </section>
 
 
-      {/* ================= COLLABORATORS ================= */}
-      <section className="bg-[#f3f7ff] px-6 pb-24">
+      {/* =====================================================
+          COLLABORATORS
+      ===================================================== */}
 
-        <div className="mx-auto max-w-[1400px] text-center">
+      <section className="light-section collaborators-section">
+
+        <div className="section-intro">
 
           <h2 className="section-title">
             Our Collaborators
           </h2>
 
-          <div className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-
-            {collaborators.map((name) => (
-              <div
-                key={name}
-                className="flex min-h-[115px] items-center justify-center rounded-2xl bg-white p-5 text-center text-sm font-semibold shadow-[0_8px_30px_rgba(7,23,95,0.06)]"
-              >
-                {name}
-              </div>
-            ))}
-
-          </div>
         </div>
+
+
+        <div className="collaborators-grid">
+
+          {collaborators.map((name) => (
+
+            <div
+              key={name}
+              className="collaborator-card"
+            >
+              {name}
+            </div>
+
+          ))}
+
+        </div>
+
       </section>
 
 
-      {/* ================= WHY US ================= */}
-      <section className="bg-[#07175f] px-6 py-24 text-white">
+      {/* =====================================================
+          WHY US
+      ===================================================== */}
 
-        <div className="mx-auto max-w-[1400px]">
+      <section className="why-section">
 
-          <h2 className="mb-16 text-center text-5xl font-extrabold">
+        <div className="why-container">
+
+          <h2 className="why-title">
             Why Us
           </h2>
 
-          <div className="grid grid-cols-1 gap-12 text-center md:grid-cols-3">
+
+          <div className="why-grid">
 
             {[
               [
@@ -453,85 +524,106 @@ export default function Home() {
                 "Awarded for leadership in secure digital transformation",
               ],
             ].map(([title, text]) => (
-              <div key={title}>
 
-                <h3 className="text-2xl font-extrabold text-[#49b8ff]">
+              <div
+                key={title}
+                className="why-card"
+              >
+
+                <h3>
                   {title}
                 </h3>
 
-                <p className="mx-auto mt-5 max-w-[390px] leading-7 text-white/90">
+                <p>
                   {text}
                 </p>
 
               </div>
+
             ))}
 
           </div>
+
         </div>
+
       </section>
 
 
-      {/* ================= AWARDS ================= */}
-      <section className="bg-white px-6 py-24">
+      {/* =====================================================
+          AWARDS
+      ===================================================== */}
 
-        <div className="mx-auto max-w-[1400px]">
+      <section className="white-section awards-section">
 
-          <h2 className="section-title text-center">
+        <div className="awards-container">
+
+          <h2 className="section-title awards-title">
             Achievements and Awards
           </h2>
 
-          <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-2">
+
+          <div className="awards-grid">
 
             {awards.map((award) => (
+
               <article
                 key={award.title}
-                className="overflow-hidden rounded-[24px] border border-[#e7ebf5] bg-white shadow-[0_12px_40px_rgba(7,23,95,0.08)]"
+                className="award-card"
               >
 
-                <div className="h-[300px] bg-[#f3f7ff]">
+                <div className="award-image">
+
                   <img
                     src={award.image}
                     alt={award.title}
-                    className="h-full w-full object-cover"
                   />
+
                 </div>
 
-                <div className="p-8">
 
-                  <h3 className="text-2xl font-extrabold leading-tight">
+                <div className="award-content">
+
+                  <h3>
                     {award.title}
                   </h3>
 
-                  <p className="mt-5 leading-7 text-slate-600">
+                  <p>
                     {award.text}
                   </p>
 
-                  <button className="mt-6 font-bold text-[#0877d8]">
+                  <button>
                     Read More →
                   </button>
 
                 </div>
+
               </article>
+
             ))}
 
           </div>
+
         </div>
+
       </section>
 
 
-      {/* ================= SOCIAL ================= */}
-      <section className="bg-white px-6 py-24 text-center">
+      {/* =====================================================
+          SOCIAL
+      ===================================================== */}
 
-        <h2 className="text-2xl font-extrabold tracking-[3px] text-[#0877d8]">
+      <section className="social-section">
+
+        <h2>
           SOCIAL MEDIA
         </h2>
 
-        <p className="mx-auto mt-5 max-w-[760px] text-xl font-semibold leading-8">
-          Join us on LinkedIn and never miss a beat on what's going on in the
-          world of quantum-safe cybersecurity.
+        <p>
+          Join us on LinkedIn and never miss a beat on what's
+          going on in the world of quantum-safe cybersecurity.
         </p>
 
-        <div className="mt-8 flex justify-center gap-6 text-3xl font-bold">
+        <div className="social-icons">
           <span>▶</span>
           <span>in</span>
           <span>◎</span>
@@ -540,27 +632,34 @@ export default function Home() {
       </section>
 
 
-      {/* ================= FOOTER ================= */}
-      <footer className="bg-[#07175f] px-8 py-16 text-white">
+      {/* =====================================================
+          FOOTER
+      ===================================================== */}
 
-        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 md:grid-cols-4">
+      <footer className="site-footer">
 
-          <div>
+        <div className="footer-grid">
+
+
+          {/* BRAND */}
+
+          <div className="footer-brand">
 
             <img
               src="/logo.png"
               alt="SafeQbit"
-              className="mb-7 h-[65px] w-auto object-contain"
             />
 
-            <p className="max-w-[300px] leading-7 text-white/75">
-              Research Powered Cybersecurity Services and Training. Eliminate
-              security threats through our innovative and extensive security
-              assessments.
+            <p>
+              Research Powered Cybersecurity Services and
+              Training. Eliminate security threats through
+              our innovative and extensive security assessments.
             </p>
 
           </div>
 
+
+          {/* QUICK LINKS */}
 
           <div>
 
@@ -568,18 +667,30 @@ export default function Home() {
               QUICK LINKS
             </h3>
 
-            <div className="space-y-4 text-white/85">
-              <Link href="/">Home</Link>
-              <br />
-              <Link href="/about">About Us</Link>
-              <br />
-              <Link href="/products">Products</Link>
-              <br />
-              <Link href="/contact">Contact Us</Link>
+            <div className="footer-links">
+
+              <Link href="/">
+                Home
+              </Link>
+
+              <Link href="/about">
+                About Us
+              </Link>
+
+              <Link href="/products">
+                Products
+              </Link>
+
+              <Link href="/contact">
+                Contact Us
+              </Link>
+
             </div>
 
           </div>
 
+
+          {/* SERVICES */}
 
           <div>
 
@@ -587,14 +698,20 @@ export default function Home() {
               SERVICES
             </h3>
 
-            <div className="space-y-4 text-white/85">
+            <div className="footer-links">
+
               {services.map((service) => (
-                <p key={service}>{service}</p>
+                <p key={service}>
+                  {service}
+                </p>
               ))}
+
             </div>
 
           </div>
 
+
+          {/* CONTACT */}
 
           <div>
 
@@ -602,7 +719,7 @@ export default function Home() {
               CONTACT INFO
             </h3>
 
-            <div className="space-y-5 leading-7 text-white/85">
+            <div className="footer-contact">
 
               <p>
                 <b>Registered Office:</b>
@@ -626,116 +743,27 @@ export default function Home() {
                 University of Delhi - 110007
               </p>
 
-              <p>contact@safeqbit.in</p>
-              <p>+91 89298 74957</p>
+              <p>
+                contact@safeqbit.in
+              </p>
+
+              <p>
+                +91 89298 74957
+              </p>
 
             </div>
+
           </div>
 
         </div>
 
 
-        <div className="mx-auto mt-14 max-w-[1400px] border-t border-white/10 pt-7 text-center text-sm text-white/60">
-          © {new Date().getFullYear()} SafeQbit Technologies Private Limited.
-          All rights reserved.
+        <div className="footer-bottom">
+          © {new Date().getFullYear()} SafeQbit Technologies
+          Private Limited. All rights reserved.
         </div>
 
       </footer>
-
-
-      {/* ================= STYLES ================= */}
-      <style jsx>{`
-
-        .section-title {
-          font-size: clamp(2rem, 4vw, 3.5rem);
-          line-height: 1.1;
-          font-weight: 800;
-          color: #07175f;
-        }
-
-        .section-subtitle {
-          margin: 1.25rem auto 0;
-          max-width: 1000px;
-          font-size: 1.1rem;
-          line-height: 1.8;
-          color: #4f6382;
-        }
-
-        .footer-heading {
-          margin-bottom: 1.5rem;
-          font-size: 1.05rem;
-          font-weight: 800;
-          letter-spacing: .02em;
-        }
-
-        /* ===== BINARY BACKGROUND ===== */
-
-        .binary-column {
-          position: absolute;
-          top: -500px;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-
-          font-family: "Courier New", monospace;
-          font-size: 22px;
-          font-weight: 500;
-          line-height: 1;
-
-          color: #3b9df5;
-
-          text-shadow:
-            0 0 5px rgba(59, 157, 245, 0.25),
-            0 0 10px rgba(59, 157, 245, 0.12);
-
-          white-space: nowrap;
-
-          animation: binaryFall linear infinite;
-        }
-
-        .binary-column span:nth-child(3n) {
-          opacity: .65;
-        }
-
-        .binary-column span:nth-child(5n) {
-          opacity: .45;
-        }
-
-        .binary-column span:nth-child(7n) {
-          opacity: .8;
-        }
-
-        @keyframes binaryFall {
-          0% {
-            transform: translateY(-100px);
-          }
-
-          100% {
-            transform: translateY(calc(100vh + 700px));
-          }
-        }
-
-        @media (max-width: 1024px) {
-          .binary-column {
-            font-size: 18px;
-            gap: 7px;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .binary-column {
-            font-size: 15px;
-            gap: 6px;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .binary-column {
-            animation: none;
-          }
-        }
-
-      `}</style>
 
     </main>
   );
