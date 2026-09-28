@@ -541,37 +541,265 @@ export default function Home() {
       </section>
 
 
-      {/* =====================================================
-          COLLABORATORS
-      ===================================================== */}
+      {/* ================= COLLABORATORS ================= */}
+<section className="bg-[#eef5ff] py-20">
+  <div className="mx-auto max-w-[1400px] px-6">
 
-      <section className="light-section collaborators-section">
+    {/* Heading */}
+    <div className="mb-12 text-center">
+      <h2 className="text-4xl font-bold text-[#07175f] md:text-5xl">
+        Our Collaborators
+      </h2>
+    </div>
 
-        <div className="section-intro">
+    {/* Slider */}
+    <div className="relative">
 
-          <h2 className="section-title">
-            Our Collaborators
-          </h2>
+      {/* LEFT ARROW */}
+      <button
+        type="button"
+        onClick={() => {
+          const slider = document.getElementById("collaborator-slider");
+          slider?.scrollBy({
+            left: -500,
+            behavior: "smooth",
+          });
+        }}
+        className="absolute left-0 top-1/2 z-10 flex h-11 w-11
+        -translate-y-1/2 items-center justify-center
+        rounded-full bg-[#dce8fb] text-2xl text-[#07175f]
+        shadow-sm transition hover:bg-[#49b8ff]"
+        aria-label="Previous collaborators"
+      >
+        ‹
+      </button>
 
+      {/* CARDS */}
+      <div
+        id="collaborator-slider"
+        className="flex gap-6 overflow-x-auto scroll-smooth px-14 pb-4
+        [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+
+        {/* 1 */}
+        <div className="min-w-[180px] max-w-[180px] shrink-0">
+          <div className="flex h-[110px] items-center justify-center rounded-2xl
+          bg-white p-5 shadow-sm">
+            <img
+              src="/images/collaborators/cdac.png"
+              alt="C-DAC"
+              className="max-h-[70px] max-w-[130px] object-contain"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-medium text-[#07175f]">
+            C-DAC
+          </p>
         </div>
 
-
-        <div className="collaborators-grid">
-
-          {collaborators.map((name) => (
-
-            <div
-              key={name}
-              className="collaborator-card"
-            >
-              {name}
-            </div>
-
-          ))}
-
+        {/* 2 */}
+        <div className="min-w-[180px] max-w-[180px] shrink-0">
+          <div className="flex h-[110px] items-center justify-center rounded-2xl
+          bg-white p-5 shadow-sm">
+            <img
+              src="/images/collaborators/powergrid.png"
+              alt="PowerGrid India"
+              className="max-h-[70px] max-w-[130px] object-contain"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-medium text-[#07175f]">
+            PowerGrid India
+          </p>
         </div>
 
-      </section>
+        {/* 3 */}
+        <div className="min-w-[180px] max-w-[180px] shrink-0">
+          <div className="flex h-[110px] items-center justify-center rounded-2xl
+          bg-white p-5 shadow-sm">
+            <img
+              src="/images/collaborators/iqsec.png"
+              alt="iQSec Labs Private Limited"
+              className="max-h-[70px] max-w-[130px] object-contain"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-medium text-[#07175f]">
+            iQSec Labs Private Limited
+          </p>
+        </div>
+
+        {/* 4 */}
+        <div className="min-w-[180px] max-w-[180px] shrink-0">
+          <div className="flex h-[110px] items-center justify-center rounded-2xl
+          bg-white p-5 shadow-sm">
+            <img
+              src="/images/collaborators/bharat5g.png"
+              alt="Bharat 5G Labs"
+              className="max-h-[70px] max-w-[130px] object-contain"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-medium text-[#07175f]">
+            Bharat 5G Labs (DoT, GoI)
+          </p>
+        </div>
+
+        {/* 5 */}
+        <div className="min-w-[180px] max-w-[180px] shrink-0">
+          <div className="flex h-[110px] items-center justify-center rounded-2xl
+          bg-white p-5 shadow-sm">
+            <img
+              src="/images/collaborators/bisag.png"
+              alt="BISAG-N India"
+              className="max-h-[70px] max-w-[130px] object-contain"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-medium text-[#07175f]">
+            BISAG-N India
+          </p>
+        </div>
+
+        {/* 6 */}
+        <div className="min-w-[180px] max-w-[180px] shrink-0">
+          <div className="flex h-[110px] items-center justify-center rounded-2xl
+          bg-white p-5 shadow-sm">
+            <img
+              src="/images/collaborators/duc.png"
+              alt="Delhi University Computer Centre"
+              className="max-h-[70px] max-w-[130px] object-contain"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-medium text-[#07175f]">
+            Delhi University Computer Centre
+          </p>
+        </div>
+
+        {/* 7 */}
+        <div className="min-w-[180px] max-w-[180px] shrink-0">
+          <div className="flex h-[110px] items-center justify-center rounded-2xl
+          bg-white p-5 shadow-sm">
+            <img
+              src="/images/collaborators/tcil.png"
+              alt="TCIL"
+              className="max-h-[70px] max-w-[130px] object-contain"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-medium text-[#07175f]">
+            TCIL – Govt. of India Enterprise
+          </p>
+        </div>
+
+        {/* 8 */}
+        <div className="min-w-[180px] max-w-[180px] shrink-0">
+          <div className="flex h-[110px] items-center justify-center rounded-2xl
+          bg-white p-5 shadow-sm">
+            <img
+              src="/images/collaborators/samgnya.png"
+              alt="Samgnya Tech Foundation"
+              className="max-h-[70px] max-w-[130px] object-contain"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-medium text-[#07175f]">
+            Samgnya Tech Foundation
+          </p>
+        </div>
+
+        {/* 9 */}
+        <div className="min-w-[180px] max-w-[180px] shrink-0">
+          <div className="flex h-[110px] items-center justify-center rounded-2xl
+          bg-white p-5 shadow-sm">
+            <img
+              src="/images/collaborators/vdt.png"
+              alt="VDT PIS Pvt. Ltd."
+              className="max-h-[70px] max-w-[130px] object-contain"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-medium text-[#07175f]">
+            VDT PIS Pvt. Ltd.
+          </p>
+        </div>
+
+        {/* 10 */}
+        <div className="min-w-[180px] max-w-[180px] shrink-0">
+          <div className="flex h-[110px] items-center justify-center rounded-2xl
+          bg-white p-5 shadow-sm">
+            <img
+              src="/images/collaborators/prakhar.png"
+              alt="Prakhar Software Solutions"
+              className="max-h-[70px] max-w-[130px] object-contain"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-medium text-[#07175f]">
+            Prakhar Software Solutions Ltd.
+          </p>
+        </div>
+
+        {/* 11 */}
+        <div className="min-w-[180px] max-w-[180px] shrink-0">
+          <div className="flex h-[110px] items-center justify-center rounded-2xl
+          bg-white p-5 shadow-sm">
+            <img
+              src="/images/collaborators/ubora.png"
+              alt="Ubora Systems and Solutions"
+              className="max-h-[70px] max-w-[130px] object-contain"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-medium text-[#07175f]">
+            Ubora Systems and Solutions
+          </p>
+        </div>
+
+        {/* 12 */}
+        <div className="min-w-[180px] max-w-[180px] shrink-0">
+          <div className="flex h-[110px] items-center justify-center rounded-2xl
+          bg-white p-5 shadow-sm">
+            <img
+              src="/images/collaborators/sig.png"
+              alt="Supreme International Group"
+              className="max-h-[70px] max-w-[130px] object-contain"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-medium text-[#07175f]">
+            Supreme International Group (SIG) sarl
+          </p>
+        </div>
+
+        {/* 13 */}
+        <div className="min-w-[180px] max-w-[180px] shrink-0">
+          <div className="flex h-[110px] items-center justify-center rounded-2xl
+          bg-white p-5 shadow-sm">
+            <img
+              src="/images/collaborators/deccan.png"
+              alt="Deccan Infotech"
+              className="max-h-[70px] max-w-[130px] object-contain"
+            />
+          </div>
+          <p className="mt-3 text-center text-sm font-medium text-[#07175f]">
+            Deccan Infotech (P) Ltd
+          </p>
+        </div>
+
+      </div>
+
+      {/* RIGHT ARROW */}
+      <button
+        type="button"
+        onClick={() => {
+          const slider = document.getElementById("collaborator-slider");
+          slider?.scrollBy({
+            left: 500,
+            behavior: "smooth",
+          });
+        }}
+        className="absolute right-0 top-1/2 z-10 flex h-11 w-11
+        -translate-y-1/2 items-center justify-center
+        rounded-full bg-[#dce8fb] text-2xl text-[#07175f]
+        shadow-sm transition hover:bg-[#49b8ff]"
+        aria-label="Next collaborators"
+      >
+        ›
+      </button>
+
+    </div>
+  </div>
+</section>
 
 
       {/* =====================================================
