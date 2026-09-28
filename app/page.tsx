@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 const activities = [
   "SafeQbit at International Conference on Interdisciplinary Innovation in Emerging Technologies and AI (ICIIIETA 2026)",
@@ -74,6 +75,19 @@ const binaryColumns = [
 ];
 
 export default function Home() {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const recentActivityImages = [
+    "/images/image7.jpg",
+    "/images/image1.jpg",
+    "/images/image2.jpg",
+    "/images/image3.jpg",
+    "/images/image4.jpg",
+    "/images/image5.jpg",
+    "/images/image6.jpg",
+    "/images/image8.jpg",
+  ];
+
   return (
     <main className="safeqbit-page">
 
@@ -293,19 +307,24 @@ export default function Home() {
     {/* ================= LEFT: PHOTO SLIDER ================= */}
     <div className="relative h-[540px] overflow-hidden rounded-[24px] bg-white shadow-sm">
 
-      {/* Main photo */}
+      {/* MAIN PHOTO */}
       <div className="h-full w-full overflow-hidden">
         <img
-          src="/images/recent-activity.jpg"
-          alt="SafeQbit recent activity"
-          className="h-full w-full object-cover"
+          src={recentActivityImages[currentImage]}
+          alt={`SafeQbit recent activity ${currentImage + 1}`}
+          className="h-full w-full object-cover transition-opacity duration-300"
         />
       </div>
 
       {/* LEFT ARROW */}
       <button
         type="button"
-        className="absolute left-5 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#07175f]/80 text-2xl text-white backdrop-blur-sm transition hover:bg-[#49b8ff]"
+        onClick={() =>
+          setCurrentImage((prev) =>
+            prev === 0 ? recentActivityImages.length - 1 : prev - 1
+          )
+        }
+        className="absolute left-5 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#07175f]/80 text-3xl text-white backdrop-blur-sm transition hover:bg-[#49b8ff]"
         aria-label="Previous image"
       >
         ‹
@@ -314,19 +333,32 @@ export default function Home() {
       {/* RIGHT ARROW */}
       <button
         type="button"
-        className="absolute right-5 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#07175f]/80 text-2xl text-white backdrop-blur-sm transition hover:bg-[#49b8ff]"
+        onClick={() =>
+          setCurrentImage((prev) =>
+            prev === recentActivityImages.length - 1 ? 0 : prev + 1
+          )
+        }
+        className="absolute right-5 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#07175f]/80 text-3xl text-white backdrop-blur-sm transition hover:bg-[#49b8ff]"
         aria-label="Next image"
       >
         ›
       </button>
 
       {/* DOTS */}
-      <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-3">
-        <span className="h-3 w-3 rounded-full bg-[#49b8ff]" />
-        <span className="h-3 w-3 rounded-full bg-white/70" />
-        <span className="h-3 w-3 rounded-full bg-white/70" />
-        <span className="h-3 w-3 rounded-full bg-white/70" />
-        <span className="h-3 w-3 rounded-full bg-white/70" />
+      <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2">
+        {recentActivityImages.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            onClick={() => setCurrentImage(index)}
+            aria-label={`Show image ${index + 1}`}
+            className={`h-3 rounded-full transition-all duration-200 ${
+              currentImage === index
+                ? "w-8 bg-[#49b8ff]"
+                : "w-3 bg-white/75 hover:bg-white"
+            }`}
+          />
+        ))}
       </div>
 
     </div>
