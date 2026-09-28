@@ -286,73 +286,120 @@ export default function Home() {
       </section>
 
 
-      {/* =====================================================
-          RECENT ACTIVITY
-      ===================================================== */}
+      {/* ================= RECENT ACTIVITY ================= */}
+<section className="bg-[#f3f7ff] px-6 py-20">
+  <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8 lg:grid-cols-[1.55fr_1fr]">
 
-      <section className="light-section recent-section">
+    {/* ================= LEFT: PHOTO SLIDER ================= */}
+    <div className="relative h-[540px] overflow-hidden rounded-[24px] bg-white shadow-sm">
 
-        <div className="two-column-container">
+      {/* Main photo */}
+      <div className="h-full w-full overflow-hidden">
+        <img
+          src="/images/recent-activity.jpg"
+          alt="SafeQbit recent activity"
+          className="h-full w-full object-cover"
+        />
+      </div>
 
-          <div className="activity-image">
+      {/* LEFT ARROW */}
+      <button
+        type="button"
+        className="absolute left-5 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#07175f]/80 text-2xl text-white backdrop-blur-sm transition hover:bg-[#49b8ff]"
+        aria-label="Previous image"
+      >
+        ‹
+      </button>
 
-            <img
-              src="/images/recent-activity.jpg"
-              alt="SafeQbit recent activity"
-            />
+      {/* RIGHT ARROW */}
+      <button
+        type="button"
+        className="absolute right-5 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#07175f]/80 text-2xl text-white backdrop-blur-sm transition hover:bg-[#49b8ff]"
+        aria-label="Next image"
+      >
+        ›
+      </button>
 
-          </div>
+      {/* DOTS */}
+      <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-3">
+        <span className="h-3 w-3 rounded-full bg-[#49b8ff]" />
+        <span className="h-3 w-3 rounded-full bg-white/70" />
+        <span className="h-3 w-3 rounded-full bg-white/70" />
+        <span className="h-3 w-3 rounded-full bg-white/70" />
+        <span className="h-3 w-3 rounded-full bg-white/70" />
+      </div>
 
-
-          <div className="activity-panel">
-
-            <div className="activity-header">
-
-              <h2>
-                Recent Activity
-              </h2>
-
-              <span>
-                Updates
-              </span>
-
-            </div>
+    </div>
 
 
-            <div className="activity-list">
+    {/* ================= RIGHT: RECENT ACTIVITY ================= */}
+    <div className="flex h-[540px] flex-col overflow-hidden rounded-[24px] bg-[#07175f] p-7 text-white shadow-lg">
 
-              {activities.map((item) => (
-                <article
-                  key={item}
-                  className="activity-card"
-                >
+      {/* HEADER - FIXED */}
+      <div className="mb-5 flex shrink-0 items-center justify-between border-b border-white/15 pb-5">
+        <h2 className="text-2xl font-extrabold">
+          Recent Activity
+        </h2>
 
-                  <div className="activity-icon">
-                    🏆
-                  </div>
+        <span className="rounded-full bg-[#49b8ff] px-4 py-2 text-xs font-bold text-[#07175f]">
+          Updates
+        </span>
+      </div>
 
-                  <div>
 
-                    <h3>
-                      {item}
-                    </h3>
+      {/* SCROLLABLE ACTIVITY LIST */}
+      <div
+        className="flex-1 overflow-y-auto pr-2"
+        style={{
+          scrollbarWidth: "thin",
+          scrollbarColor: "#49b8ff #10266f",
+        }}
+      >
 
-                    <button>
-                      Read more
-                    </button>
+        <div className="space-y-4">
 
-                  </div>
+          {activities.map((item) => (
+            <article
+              key={item}
+              className="rounded-2xl border border-white/10 bg-[#12277e] p-4 transition hover:bg-[#18338d]"
+            >
 
-                </article>
-              ))}
+              <div className="flex gap-3">
 
-            </div>
+                {/* ICON */}
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#1e3b92] text-lg">
+                  🏆
+                </span>
 
-          </div>
+                {/* CONTENT */}
+                <div className="min-w-0">
+
+                  <h3 className="text-[15px] font-bold leading-6 text-white">
+                    {item}
+                  </h3>
+
+                  <button
+                    type="button"
+                    className="mt-1 text-sm font-bold text-[#49b8ff] hover:text-white"
+                  >
+                    Read more
+                  </button>
+
+                </div>
+
+              </div>
+
+            </article>
+          ))}
 
         </div>
 
-      </section>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
 
       {/* =====================================================
